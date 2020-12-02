@@ -1,0 +1,22 @@
+{
+  "name": "lod-disc-bot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Light-On-Dev/LOD-Disc-Bot.git"
+  },
+  "author": "IzMichael",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/Light-On-Dev/LOD-Disc-Bot/issues"
+  },
+  "homepage": "https://github.com/Light-On-Dev/LOD-Disc-Bot#readme",
+  "dependencies": {
+    "discord.js": "^12.5.1"
+  }
+}
