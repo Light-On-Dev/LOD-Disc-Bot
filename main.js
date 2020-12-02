@@ -9,7 +9,7 @@ client.once('ready', () => {
 });
 
 client.on('message', message => {
-    if (!message.channel.id == '783580937778757652' || !message.channel.id == '783556445781884928' || !message.author.bot || !message.content.startsWith(prefix)) {
+    if (!message.author.bot || !message.content.startsWith(prefix)) {
         message.channel.setPosition(0);
     }
 
@@ -17,6 +17,12 @@ client.on('message', message => {
 
     const args = message.content.slice(prefix.length).split(/ +/);
     const command = args.shift().toLowerCase();
+
+    if (message.content.includes('nick')) {
+        message.delete();
+        if (!message.guild.me.hasPermission('MANAGE_NICKNAMES')) return message.channel.send('I don\'t have permission to change your nickname!');
+        message.member.setNickname(message.content.replace('!nick ', ''));
+    }
 
     if (command === 'join') {
         let cst = message.guild.roles.cache.find(r => r.name === "Customer");
@@ -52,4 +58,4 @@ client.on('guildMemberAdd', guildMember => {
     guildMember.roles.add(everyoneRole);
 });
 
-client.login(process.env.BOT_TOKEN);
+client.login('CLIENT TOKEN');
