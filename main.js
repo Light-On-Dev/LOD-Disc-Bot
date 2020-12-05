@@ -1,6 +1,6 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
-
+const ignore = ['783556445781884928', '783828083974864896']
 const prefix = '!';
 
 
@@ -9,6 +9,10 @@ client.once('ready', () => {
 });
 
 client.on('message', message => {
+    if (ignore.includes(message.channel.id)) {
+        return;
+    }
+
     if (!message.author.bot || !message.content.startsWith(prefix)) {
         message.channel.setPosition(0);
     }
@@ -48,6 +52,16 @@ client.on('message', message => {
         }).then(channel => channel.send("**Hey! Here you can easily communicate with us, as this will be the primary method of communication.**"));
     } else if (command === 'delete') {
         message.channel.delete();
+    } else if (command === 'links') {
+        const linksEmbed = new Discord.MessageEmbed()
+            .setColor('#0099ff')
+            .addFields({
+                name: 'Our Website',
+                value: 'https://lightondev.xyz',
+                inline: true
+            }, )
+
+        message.channel.send(linksEmbed);
     }
 });
 
@@ -58,4 +72,4 @@ client.on('guildMemberAdd', guildMember => {
     guildMember.roles.add(everyoneRole);
 });
 
-client.login('CLIENT TOKEN');
+client.login('BOT TOKEN');
